@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 448623421327237134}
   - component: {fileID: 4606718554397925133}
   - component: {fileID: -7747120259721328234}
+  - component: {fileID: -5951428776951231280}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -159,6 +160,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+--- !u!114 &-5951428776951231280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368438292116165174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91c9c1c61eb9234c80be108d17cbf38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1176975822747551716, guid: 499ba4475fba9d348982978d3de67fa9, type: 3}
+  projectileSpeed: 10
+  projectileLifeTime: 5
+  firingRate: 0.2
+  isFiring: 0
 --- !u!1 &3472345461784977950
 GameObject:
   m_ObjectHideFlags: 0
