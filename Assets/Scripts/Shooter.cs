@@ -71,7 +71,7 @@ public class Shooter : MonoBehaviour
             spawnTime = Mathf.Clamp(spawnTime, timeBetweenShoots, float.MaxValue);
 
             audioPlayer.playShootingClip();
-            Debug.Log("Ma auzi?");
+            
 
             yield return new WaitForSeconds(spawnTime);
 
