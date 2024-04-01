@@ -25,13 +25,13 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthSlider.maxValue = playerHealth.getHealth();
+        healthSlider.maxValue = playerHealth.GetHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthSlider.value = playerHealth.getHealth();
+        healthSlider.value = playerHealth.GetHealth();
         score.text = scoreKeeper.GetScore().ToString("000000000");
     }
 }

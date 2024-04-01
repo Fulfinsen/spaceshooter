@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
     }
 
-    public int getHealth()
+    public int GetHealth()
     {
         return health;
     }
