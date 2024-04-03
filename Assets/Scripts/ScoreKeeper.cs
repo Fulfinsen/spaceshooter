@@ -1,20 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
 {
-
     int score;
-    static ScoreKeeper instance;
-
-    public int GetScore()
-    {  return score; }
-
-    public void ResetScore()
-    { score = 0; }
-
+    static ScoreKeeper instance; // pure way of singleton
+    
 
     private void Awake()
     {
@@ -23,9 +15,6 @@ public class ScoreKeeper : MonoBehaviour
 
     void ManageSingleton()
     {
-        //int instanceCount = FindObjectsOfType(GetType()).Length; first option of singleton
-        //if (instanceCount > 1)
-
         if (instance != null)
         {
             gameObject.SetActive(false);
@@ -38,11 +27,15 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
+    public int GetScore() { return score; }
 
-    public void ModifyScore(int value)
+    public void UpdateScore(int value)
     {
         score += value;
         Mathf.Clamp(score, 0, int.MaxValue);
-        Debug.Log(score);
+        Debug.Log("Score: " + score);
     }
+
+    public void ResetScore()
+    { score = 0; }
 }

@@ -5,17 +5,17 @@ using TMPro;
 
 public class UIGameOver : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI scoreText;
     ScoreKeeper scoreKeeper;
 
-    private void Awake()
+    void Awake()
     {
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Start()
     {
-        scoreText.text = "Your score:\n" + scoreKeeper.GetScore();
+        scoreText.text = "You score:\n" + scoreKeeper.GetScore();
     }
 }
+

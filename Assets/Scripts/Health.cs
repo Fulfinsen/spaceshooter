@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] bool isPlayer;
     [SerializeField] int health = 50;
-    [SerializeField] int score = 50; //how many points we get when we kill an enemy
+    [SerializeField] int score = 50;
     [SerializeField] ParticleSystem hitEffect;
 
     [SerializeField] bool applyCameraShake;
@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
     ScoreKeeper scoreKeeper;
     LevelManager levelManager;
 
-    private void Awake()
+    void Awake()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         audioPlayer = FindObjectOfType<AudioPlayer>();
@@ -25,33 +25,26 @@ public class Health : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+
+        if (damageDealer != null)
+        {
+            TakeDamage(damageDealer.GetDamage());
+            PlayHitEffect();
+            audioPlayer.playDamageClip();
+            ShakeCamera();
+            damageDealer.Hit();
+        }
+    }
+
     public int GetHealth()
     {
         return health;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        DamageDealer damageDealer = collision.GetComponent<DamageDealer>();
-
-        if( damageDealer != null )
-        {
-            takeDamage(damageDealer.getDamage());
-            playHitEffect();
-            audioPlayer.playDamageClip();
-            shakeCamera();
-            damageDealer.hit();
-        }
-    }
-
-    void shakeCamera()
-    {
-        if (cameraShake != null && applyCameraShake) 
-        { 
-            cameraShake.Play();
-        }
-    }
-    void takeDamage(int damage)
+    void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
@@ -60,25 +53,34 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Die()
+    void Die()
     {
-        if(!isPlayer)
+        if (!isPlayer)
         {
-            scoreKeeper.ModifyScore(score);
+            scoreKeeper.UpdateScore(score);
         }
         else
         {
-            levelManager.loadGameOver();
+            levelManager.LoadGameOver();
         }
         Destroy(gameObject);
     }
 
-    void playHitEffect()
+    void PlayHitEffect()
     {
         if (hitEffect != null)
         {
-            ParticleSystem instance = Instantiate (hitEffect, transform.position, Quaternion.identity);
+            ParticleSystem instance = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
+
+    void ShakeCamera()
+    {
+        if (cameraShake != null && applyCameraShake)
+        {
+            cameraShake.Play();
+        }
+    }
 }
+
